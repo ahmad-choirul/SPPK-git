@@ -47,10 +47,10 @@ public class KriteriaLahanModel {
         return list;
     }
 
-    public List<KriteriaLahan> getAll(String nidn) {
+    public List<KriteriaLahan> getAll(String no) {
         try {
             String sql = "SELECT kd.no, k.nama, s.nama FROM kriteria_lahan kd, "
-                    + "subkriteria s, kriteria k WHERE kd.id_kriteria=k.id AND kd.no='" + nidn + "' AND kd.id_himpunan=s.id ORDER BY kd.id_kriteria";
+                    + "subkriteria s, kriteria k WHERE kd.id_kriteria=k.id AND kd.no='" + no + "' AND kd.id_himpunan=s.id ORDER BY kd.id_kriteria";
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             list = new ArrayList<>();
@@ -109,7 +109,7 @@ public class KriteriaLahanModel {
         return namaKriteria;
     }
 
-    public String[] getDosen() {
+    public String[] getlahan() {
         String sql = "SELECT nama FROM lahan ORDER BY no";
         PreparedStatement statement = null;
         String[] namaDosen = null;
@@ -131,12 +131,12 @@ public class KriteriaLahanModel {
         return namaDosen;
     }
 
-    public KriteriaLahan getKriteriaLahan(String nidn) {
+    public KriteriaLahan getKriteriaLahan(String no) {
         KriteriaLahan kriteria_dosen = null;
         try {
             String sql = "SELECT * FROM kriteria_lahan WHERE no=?";
             PreparedStatement prepare = con.prepareStatement(sql);
-            prepare.setString(1, nidn);
+            prepare.setString(1, no);
             ResultSet resultSet = prepare.executeQuery();
             list = new ArrayList<>();
             while (resultSet.next()) {
@@ -148,26 +148,26 @@ public class KriteriaLahanModel {
         return kriteria_dosen;
     }
     
-    public String[] getsubkriteria(String id) {
+    public String[] getsubkriteria(int id) {
         String query = "SELECT nama FROM `subkriteria` WHERE id_kriteria='KR00"+id+"'";
         PreparedStatement statement = null;
-        String[] namaDosen = null;
+        String[] namalahan = null;
         try {
             statement = con.prepareStatement(query);
             ResultSet rs = statement.executeQuery();
             rs.last();
             int rows = rs.getRow();
-            namaDosen = new String[rows];
+            namalahan = new String[rows];
             rs.beforeFirst();
             int i = 0;
             while (rs.next()) {
-                namaDosen[i] = rs.getString(1);
+                namalahan[i] = rs.getString(1);
                 i++;
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Data barang gagal ditampilkan\n" + e.getMessage());
         }
-        return namaDosen;
+        return namalahan;
     }
 
     public Integer getNilai(String id_himpunan) {
@@ -185,19 +185,19 @@ public class KriteriaLahanModel {
         }
     }
 
-    public String getNidn() {
-        String nidn = "";
+    public String getno() {
+        String no = "";
         String sql = "SELECT no FROM kriteria_lahan ORDER BY no DESC";
         try {
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) {
-                nidn = resultSet.getString(1);
+                no = resultSet.getString(1);
             }
         } catch (SQLException e) {
 
         }
-        return nidn;
+        return no;
     }
 
     public String[] getNamaLahan() {
@@ -387,7 +387,7 @@ public class KriteriaLahanModel {
             con.setAutoCommit(false);
             for (int i = 1; i < 3; i++) {
                 prepare.setObject(i, kriteria_dosen.getObject(i));
-                prepare.setObject(3, kriteria_dosen.getNidn());
+                prepare.setObject(3, kriteria_dosen.getno());
             }
             prepare.executeUpdate();
             con.commit();
@@ -404,13 +404,13 @@ public class KriteriaLahanModel {
         return true;
     }
 
-    public boolean delete(String nidn) {
+    public boolean delete(String no) {
         String sql = "DELETE FROM kriteria_lahan WHERE no=?";
         PreparedStatement prepare = null;
         try {
             prepare = con.prepareStatement(sql);
             con.setAutoCommit(false);
-            prepare.setString(1, nidn);
+            prepare.setString(1, no);
             prepare.executeUpdate();
             con.commit();
         } catch (SQLException ex) {
@@ -426,13 +426,13 @@ public class KriteriaLahanModel {
         return true;
     }
 
-    public boolean insertKinerja(String nidn, Double nilai, String kinerja) {
+    public boolean insertKinerja(String no, Double nilai, String kinerja) {
         String sql = "INSERT INTO hasil_hitung (no, nilai, kinerja) VALUES (?, ?, ?)";
         PreparedStatement prepare = null;
         try {
             prepare = con.prepareStatement(sql);
             con.setAutoCommit(false);
-            prepare.setString(1, nidn);
+            prepare.setString(1, no);
             prepare.setDouble(2, nilai);
             prepare.setString(3, kinerja);
             prepare.executeUpdate();

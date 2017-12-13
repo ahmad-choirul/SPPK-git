@@ -18,7 +18,9 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new LoginView().setVisible(true);
+//        new MainForm().setVisible(true);
+LoginView a = new LoginView();
+a.setVisible(true);
     }
     
 }

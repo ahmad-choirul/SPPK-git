@@ -33,7 +33,7 @@ public class LahanView extends javax.swing.JInternalFrame {
         setLocation((1366 / 2) - (getWidth() / 2), (768 / 2) - (getHeight() / 2));
     }
 
-    public JTextField getJenisKelaminField() {
+    public JTextField getalamtField() {
         return alamat;
     }
 
@@ -57,8 +57,8 @@ public class LahanView extends javax.swing.JInternalFrame {
         return namaField;
     }
 
-    public JTextField getNidnField() {
-        return nidnField;
+    public JTextField getNoField() {
+        return nofield;
     }
 
     public JButton getTambahButton() {
@@ -77,12 +77,12 @@ public class LahanView extends javax.swing.JInternalFrame {
         this.dosenTableModel = dosenTableModel;
     }
 
-    public String getNidn() {
-        return nidn;
+    public String getno() {
+        return no;
     }
 
-    public void setNidn(String nidn) {
-        this.nidn = nidn;
+    public void setno(String no) {
+        this.no = no;
     }
     
     /**
@@ -102,7 +102,7 @@ public class LahanView extends javax.swing.JInternalFrame {
         hapusButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        nidnField = new javax.swing.JTextField();
+        nofield = new javax.swing.JTextField();
         namaField = new javax.swing.JTextField();
         alamat = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -112,7 +112,8 @@ public class LahanView extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setTitle("Dosen");
+        setTitle("Lahan");
+        setToolTipText("");
 
         jToolBar1.setFloatable(false);
 
@@ -182,8 +183,8 @@ public class LahanView extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel1.setText("NO :");
 
-        nidnField.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        nidnField.setEnabled(false);
+        nofield.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        nofield.setEnabled(false);
 
         namaField.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         namaField.setEnabled(false);
@@ -207,7 +208,7 @@ public class LahanView extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nidnField, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE))
+                        .addComponent(nofield, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -227,7 +228,7 @@ public class LahanView extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(nidnField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nofield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -298,7 +299,7 @@ public class LahanView extends javax.swing.JInternalFrame {
 
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
         if (dosenTable.getSelectedRow() != -1) {
-            dosenController.saveOrDelete(nidn);
+            dosenController.saveOrDelete(no);
         }
     }//GEN-LAST:event_hapusButtonActionPerformed
 
@@ -320,12 +321,12 @@ public class LahanView extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField namaField;
-    private javax.swing.JTextField nidnField;
+    private javax.swing.JTextField nofield;
     private javax.swing.JButton tambahButton;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
     private LahanModel dosenModel;
     private LahanTableModel dosenTableModel;
-    private String nidn = "";
+    private String no = "";
     private LahanController dosenController;
 }

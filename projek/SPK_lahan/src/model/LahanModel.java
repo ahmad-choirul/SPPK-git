@@ -37,8 +37,8 @@ public class LahanModel {
             ResultSet resultSet = statement.executeQuery(sql);
             list = new ArrayList<>();
             while(resultSet.next()){
-                Lahan dosen = new Lahan(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
-                list.add(dosen);
+                Lahan lahan = new Lahan(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
+                list.add(lahan);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error When Retrieve Data\n"+ex);
@@ -46,12 +46,12 @@ public class LahanModel {
         return list;
     }
 
-    public Lahan getDosen(String nidn){
+    public Lahan getlahan(String no){
         Lahan dosen = null;
         try {
             String sql = "SELECT * FROM lahan WHERE no=?";
             PreparedStatement prepare = con.prepareStatement(sql);
-            prepare.setString(1, nidn);
+            prepare.setString(1, no);
             ResultSet resultSet = prepare.executeQuery();
             list = new ArrayList<>();
             while(resultSet.next()){
@@ -63,19 +63,19 @@ public class LahanModel {
         return dosen;
     }
     
-    public String getNidn(){
-        String nidn = "";
+    public String getno(){
+        String no = "";
         String sql = "SELECT no FROM lahan ORDER BY no DESC";
         try{
             Statement statement = con.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             if(resultSet.next()){
-                nidn = resultSet.getString(1);
+                no = resultSet.getString(1);
             }
         }catch(SQLException e){
             
         }
-        return nidn;
+        return no;
     }
 
     public boolean insert(Lahan dosen){
@@ -110,7 +110,7 @@ public class LahanModel {
             con.setAutoCommit(false);
             for(int i=1 ; i<3 ; i++){
                 prepare.setObject(i, dosen.getObject(i));
-                prepare.setObject(3, dosen.getNidn());
+                prepare.setObject(3, dosen.getNo());
             }
             prepare.executeUpdate();
             con.commit();
@@ -127,15 +127,15 @@ public class LahanModel {
         return true;
     }
     
-    public boolean delete(String nidn){
+    public boolean delete(String no){
         String sql = "DELETE FROM lahan WHERE no=?";
         PreparedStatement prepare = null;
         try {
             prepare = con.prepareStatement(sql);
             con.setAutoCommit(false);
-            prepare.setString(1, nidn);
+            prepare.setString(1, no);
             prepare.executeUpdate();
-            deleteKriteria(nidn);
+            deleteKriteria(no);
             con.commit();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error When Delete Data\n"+ex);
@@ -150,13 +150,13 @@ public class LahanModel {
         return true;
     }
     
-    public boolean deleteKriteria(String nidn){
+    public boolean deleteKriteria(String no){
         String sql = "DELETE FROM kriteria_lahan WHERE no=?";
         PreparedStatement prepare = null;
         try {
             prepare = con.prepareStatement(sql);
             con.setAutoCommit(false);
-            prepare.setString(1, nidn);
+            prepare.setString(1, no);
             prepare.executeUpdate();
             con.commit();
         } catch (SQLException ex) {

@@ -57,11 +57,11 @@ public class KriteriaLahanView extends javax.swing.JInternalFrame {
     }
 
     public String getNo() {
-        return nidn;
+        return no;
     }
 
-    public void setNidn(String nidn) {
-        this.nidn = nidn;
+    public void setno(String no) {
+        this.no = no;
     }
 
     public String getId_kriteria() {
@@ -214,6 +214,6 @@ public class KriteriaLahanView extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
     private KriteriaLahanModel kriteriaDosenModel;
     private KriteriaLahanTableModel kriteriaDosenTableModel;
-    private String nidn, id_kriteria, id_subkriteria;
+    private String no, id_kriteria, id_subkriteria;
     private KriteriaLahanController kriteriaDosenController;
 }

@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
 public class LahanTableModel extends AbstractTableModel{
 
     private List<Lahan> list;
-    private String[] header = {"NIDN", "Nama", "Jenis Kelamin"};
+    private String[] header = {"NO", "Nama", "alamat"};
 
     public LahanTableModel() {
         list = new ArrayList<>();

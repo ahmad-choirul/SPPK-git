@@ -29,32 +29,32 @@ import view.LahanView;
 public class LahanController {
 
     private LahanView LahanView;
-    private LahanModel dosenModel;
+    private LahanModel lahanmodel;
     private Lahan dosen;
 
     public LahanController(LahanView dosenView, LahanModel dosenModel) {
         this.LahanView = dosenView;
-        this.dosenModel = dosenModel;
+        this.lahanmodel = dosenModel;
     }
 
     public void refreshDosenTable() {
         LahanView.setLahanTableModel(new LahanTableModel());
-        LahanView.getlahanTableModel().setListDosen(dosenModel.getAll());
+        LahanView.getlahanTableModel().setListDosen(lahanmodel.getAll());
         LahanView.getLahanTable().setModel(LahanView.getlahanTableModel());
         LahanView.getLahanTable().getTableHeader().setFont(new Font("Segoe UI", 0, 14));
         // ResizeColumnUtility.dynamicResize(dosenView.getDosenTable());
     }
 
-    public void addValueComponent(String nidn) {
-        dosen = dosenModel.getDosen(nidn);
-        LahanView.getNidnField().setText(dosen.getNidn());
+    public void addValueComponent(String no) {
+        dosen = lahanmodel.getlahan(no);
+        LahanView.getNoField().setText(dosen.getNo());
         LahanView.getNamaField().setText(dosen.getNama());
-        LahanView.getJenisKelaminField().setText(dosen.getJenisKelamin());
+        LahanView.getalamtField().setText(dosen.getalamat());
     }
 
     private Lahan createDosen() {
-        dosen = new Lahan(LahanView.getNidnField().getText(), LahanView.getNamaField().getText(), 
-                LahanView.getJenisKelaminField().getText());
+        dosen = new Lahan(LahanView.getNoField().getText(), LahanView.getNamaField().getText(), 
+                LahanView.getalamtField().getText());
         return dosen;
     }
 
@@ -62,7 +62,7 @@ public class LahanController {
         boolean result = true;
         if (LahanView.getNamaField().getText().isEmpty()) {
             JOptionPane.showMessageDialog(LahanView, "Nama Masih Kosong !!!");
-        } else if (LahanView.getJenisKelaminField().getText().isEmpty()) {
+        } else if (LahanView.getalamtField().getText().isEmpty()) {
             JOptionPane.showMessageDialog(LahanView, "Tempat lahir Masih Kosong !!!");
         } else {
             result = false;
@@ -72,7 +72,7 @@ public class LahanController {
 
     public void saveOrNew() {
         if (!isEmptyField()) {
-            if (dosenModel.insert(createDosen())) {
+            if (lahanmodel.insert(createDosen())) {
                 refreshDosenTable();
                 resetData();
                 JOptionPane.showMessageDialog(LahanView, "Insert Data Dosen Sukses.");
@@ -83,7 +83,7 @@ public class LahanController {
     }
     
     public String autoNumber() {
-        String number = dosenModel.getNidn();
+        String number = lahanmodel.getno();
         if (number.equals("")) {
             number = "0000000001";
         } else {
@@ -121,7 +121,7 @@ public class LahanController {
 
     public void saveOrUpdate() {
         if (!isEmptyField()) {
-            if (dosenModel.update(createDosen())) {
+            if (lahanmodel.update(createDosen())) {
                 refreshDosenTable();
                 resetData();
                 JOptionPane.showMessageDialog(LahanView, "Update Data Dosen Sukses.");
@@ -131,11 +131,11 @@ public class LahanController {
         }
     }
 
-    public void saveOrDelete(String nidn) {
+    public void saveOrDelete(String no) {
         if (LahanView.getLahanTable().getSelectedRow() != -1) {
             if (JOptionPane.showConfirmDialog(LahanView, "Anda yakin ingin menghapus data ini?", "Hapus data",
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                if (dosenModel.delete(nidn)) {
+                if (lahanmodel.delete(no)) {
                     resetData();
                     JOptionPane.showMessageDialog(LahanView, "Delete Data Dosen Sukses.");
                 } else {
@@ -151,12 +151,12 @@ public class LahanController {
             LahanView.getTambahButton().setEnabled(true);
             LahanView.getUpdateButton().setEnabled(false);
             LahanView.getHapusButton().setEnabled(false);
-            LahanView.getNidnField().setEnabled(false);
-            LahanView.getNidnField().setText(autoNumber());
+            LahanView.getNoField().setEnabled(false);
+            LahanView.getNoField().setText(autoNumber());
             LahanView.getNamaField().setEnabled(true);
             LahanView.getNamaField().setText("");
-            LahanView.getJenisKelaminField().setEnabled(true);
-            LahanView.getJenisKelaminField().setText("");
+            LahanView.getalamtField().setEnabled(true);
+            LahanView.getalamtField().setText("");
         } else {
             resetData();
         }
@@ -168,12 +168,12 @@ public class LahanController {
         LahanView.getTambahButton().setEnabled(false);
         LahanView.getUpdateButton().setEnabled(true);
         LahanView.getHapusButton().setEnabled(true);
-        LahanView.getNidnField().setEnabled(false);
-        LahanView.getNidnField().setText("");
+        LahanView.getNoField().setEnabled(false);
+        LahanView.getNoField().setText("");
         LahanView.getNamaField().setEnabled(false);
         LahanView.getNamaField().setText("");
-        LahanView.getJenisKelaminField().setEnabled(false);
-        LahanView.getJenisKelaminField().setText("");
+        LahanView.getalamtField().setEnabled(false);
+        LahanView.getalamtField().setText("");
         refreshDosenTable();
     }
 
@@ -183,9 +183,9 @@ public class LahanController {
             LahanView.getTambahButton().setEnabled(false);
             LahanView.getUpdateButton().setText("Simpan");
             LahanView.getHapusButton().setEnabled(false);
-            LahanView.getNidnField().setEnabled(true);
+            LahanView.getNoField().setEnabled(true);
             LahanView.getNamaField().setEnabled(true);
-            LahanView.getJenisKelaminField().setEnabled(true);
+            LahanView.getalamtField().setEnabled(true);
         } else {
             saveOrUpdate();
         }
@@ -196,9 +196,9 @@ public class LahanController {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (LahanView.getLahanTable().getSelectedRow() != -1) {
-                    LahanView.setNidn(LahanView.getLahanTable().getValueAt(
+                    LahanView.setno(LahanView.getLahanTable().getValueAt(
                             LahanView.getLahanTable().getSelectedRow(), 0).toString());
-                    addValueComponent(LahanView.getNidn());
+                    addValueComponent(LahanView.getno());
                 }
             }
         });

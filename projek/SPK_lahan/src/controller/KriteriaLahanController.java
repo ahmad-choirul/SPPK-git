@@ -38,11 +38,12 @@ public class KriteriaLahanController {
     private JTextField fieldNama;
     private JLabel[] kriteriaLabel;
     private JComboBox[] field;
-    private String[] himpunan = new String[]{"Sangat Baik", "Baik", "Cukup", "Buruk", "Sangat Buruk"};
+    private String[] himpunan = new String[5];
 
     public KriteriaLahanController(KriteriaLahanView kriteriaDosenView, KriteriaLahanModel kriteriaDosenModel) {
         this.Kriterialahanview = kriteriaDosenView;
         this.kriterialahanmodel = kriteriaDosenModel;
+        setkriteria();
     }
 
     public void setInputForm(KriteriaLahanModel kriteriaDosenModel, FormInputKriteria formInputKriteria) {
@@ -50,9 +51,9 @@ public class KriteriaLahanController {
         this.formInputKriteria = formInputKriteria;
     }
 
-    public void refreshKriteriaLahanTable(String nidn) {
+    public void refreshKriteriaLahanTable(String no) {
         Kriterialahanview.setKriteriaDosenTableModel(new KriteriaLahanTableModel());
-        Kriterialahanview.getKriteriaDosenTableModel().setListKriteria_dosen(kriterialahanmodel.getAll(nidn));
+        Kriterialahanview.getKriteriaDosenTableModel().setListKriteria_dosen(kriterialahanmodel.getAll(no));
         Kriterialahanview.getKriteriaDosenTable().setModel(Kriterialahanview.getKriteriaDosenTableModel());
         Kriterialahanview.getKriteriaDosenTable().getTableHeader().setFont(new Font("Segoe UI", 0, 14));
         // ResizeColumnUtility.dynamicResize(kriteriaDosenView.getKriteriaDosenTable());
@@ -63,8 +64,7 @@ public class KriteriaLahanController {
         fieldNama = new JTextField(Kriterialahanview.getNamaLahanField().getSelectedItem().toString());
         fieldNama.setEnabled(false);
         button = new JButton("Simpan");
-        kriteriaLabel = new JLabel[kriterialahanmodel.getNamaKriteria().length];
-        field = new JComboBox[kriterialahanmodel.getNamaKriteria().length];
+        
         namaLabel.setText("Nama Lahan : ");
         namaLabel.setFont(new Font("Segoe UI", 0, 12));
         fieldNama.setFont(new Font("Segoe UI", 0, 12));
@@ -73,25 +73,31 @@ public class KriteriaLahanController {
         formInputKriteria.getPanel().add(namaLabel);
         formInputKriteria.getPanel().add(fieldNama);
         addAction(button);
-        for (int i = 1; i < field.length; i++) {
-            kriteriaLabel[i] = new JLabel();
-            kriteriaLabel[i].setFont(new Font("Segoe UI", 0, 12));
-            kriteriaLabel[i].setText(kriterialahanmodel.getKriteria()[i]);
-
-            field[i] = new JComboBox();
-            field[i].setFont(new Font("Segoe UI", 0, 12));
-            himpunan = kriterialahanmodel.getsubkriteria("" + i);
-            for (int j = 0; j < himpunan.length; j++) {
-                field[i].addItem(himpunan[j]);
-            }
-
+        for (int i = 0; i < kriteriaLabel.length; i++) {
             formInputKriteria.getPanel().add(kriteriaLabel[i]);
             formInputKriteria.getPanel().add(field[i]);
         }
+
         formInputKriteria.getPanel().add(button);
         formInputKriteria.getPanel().updateUI();
         formInputKriteria.revalidate();
         formInputKriteria.pack();
+    }
+
+    public void setkriteria() {
+        kriteriaLabel = new JLabel[kriterialahanmodel.getNamaKriteria().length];
+        field = new JComboBox[kriterialahanmodel.getNamaKriteria().length];
+        for (int i = 0; i < field.length; i++) {
+            kriteriaLabel[i] = new JLabel();
+            kriteriaLabel[i].setFont(new Font("Segoe UI", 0, 12));
+            kriteriaLabel[i].setText(kriterialahanmodel.getKriteria()[i]);
+            field[i] = new JComboBox();
+            field[i].setFont(new Font("Segoe UI", 0, 12));
+            himpunan = kriterialahanmodel.getsubkriteria(i +1);
+            for (int j = 0; j < himpunan.length; j++) {
+                field[i].addItem(himpunan[j]);
+                }
+        }
     }
 
     private void addAction(JButton button) {
@@ -107,6 +113,7 @@ public class KriteriaLahanController {
         System.out.println(kriteriaLabel.length);
         for (int i = 0; i < kriteriaLabel.length; i++) {
             String no = kriterialahanmodel.getno(fieldNama.getText());
+            System.out.println("kriteria label = " + kriteriaLabel[i].getText());
             String id_kriteria = kriterialahanmodel.getIdKriteria(kriteriaLabel[i].getText());
             String id_sub = kriterialahanmodel.getIdSubKriteria(id_kriteria, field[i].getSelectedItem().toString());
             kriteria_dosen = new KriteriaLahan(no, id_kriteria, id_sub);
@@ -145,7 +152,7 @@ public class KriteriaLahanController {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if (Kriterialahanview.getNamaLahanField().getSelectedIndex() != -1) {
-                    Kriterialahanview.setNidn(kriterialahanmodel.getno(Kriterialahanview.getNamaLahanField().getSelectedItem().toString()));
+                    Kriterialahanview.setno(kriterialahanmodel.getno(Kriterialahanview.getNamaLahanField().getSelectedItem().toString()));
                     refreshKriteriaLahanTable(Kriterialahanview.getNo());
                 }
             }

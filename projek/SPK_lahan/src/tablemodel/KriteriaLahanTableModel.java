@@ -17,7 +17,7 @@ import javax.swing.table.AbstractTableModel;
 public class KriteriaLahanTableModel extends AbstractTableModel{
 
     private List<KriteriaLahan> list;
-    private String[] header = {"NIDN", "Kriteria", "Sub Kriteria"};
+    private String[] header = {"NO", "Kriteria", "Sub Kriteria"};
 
     public KriteriaLahanTableModel() {
         list = new ArrayList<>();

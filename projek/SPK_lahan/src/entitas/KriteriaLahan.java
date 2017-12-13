@@ -11,20 +11,20 @@ package entitas;
  */
 public class KriteriaLahan {
     
-    private String nidn;
+    private String no;
     private String id_kriteria;
     private String id_himpunan;
     private String nama_kriteria;
     private String subkriteria;
 
-    public KriteriaLahan(String nidn, String id_kriteria, String id_himpunan) {
-        this.nidn = nidn;
+    public KriteriaLahan(String no, String id_kriteria, String id_himpunan) {
+        this.no = no;
         this.id_kriteria = id_kriteria;
         this.id_himpunan = id_himpunan;
     }
 
-    public KriteriaLahan(String nidn, String id_kriteria, String id_himpunan, String nama_kriteria, String subkriteria) {
-        this.nidn = nidn;
+    public KriteriaLahan(String no, String id_kriteria, String id_himpunan, String nama_kriteria, String subkriteria) {
+        this.no = no;
         this.id_kriteria = id_kriteria;
         this.id_himpunan = id_himpunan;
         this.nama_kriteria = nama_kriteria;
@@ -47,8 +47,8 @@ public class KriteriaLahan {
         this.subkriteria = subkriteria;
     }
     
-    public String getNidn(){
-        return nidn;
+    public String getno(){
+        return no;
     }
 
     public String getIdKriteria(){
@@ -59,8 +59,8 @@ public class KriteriaLahan {
         return id_himpunan;
     }
 
-    public void setNidn(String nidn){
-        this.nidn = nidn;
+    public void no(String no){
+        this.no = no;
     }
 
     public void setIdKriteria(String id_kriteria){
@@ -73,7 +73,7 @@ public class KriteriaLahan {
 
     public Object getObject(int index){
         switch(index){
-            case 0 : return nidn;
+            case 0 : return no;
             case 1 : return id_kriteria;
             case 2 : return id_himpunan;
             default : return null;
@@ -82,7 +82,7 @@ public class KriteriaLahan {
     
     public Object getObjects(int index){
         switch(index){
-            case 0 : return nidn;
+            case 0 : return no;
             case 1 : return nama_kriteria;
             case 2 : return subkriteria;
             default : return null;

@@ -104,7 +104,7 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Penilaian Kinerja DosenLahan");
+        jMenu2.setText("Penilaian Kinerja Lahan");
 
         jMenuItem6.setText("Mulai Analisa");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
