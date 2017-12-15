@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  *
- * @author Fadli Hudaya
+ * @author ahmad choirul
  */
 public class Lahan {
     

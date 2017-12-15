@@ -23,7 +23,7 @@ public class KriteriaLahanTableModel extends AbstractTableModel{
         list = new ArrayList<>();
     }
     
-    public void setListKriteria_dosen(List<KriteriaLahan> list){
+    public void setListKriteria_lahan(List<KriteriaLahan> list){
         this.list = list;
     }
     

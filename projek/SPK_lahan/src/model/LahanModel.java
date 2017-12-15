@@ -47,7 +47,7 @@ public class LahanModel {
     }
 
     public Lahan getlahan(String no){
-        Lahan dosen = null;
+        Lahan lahan = null;
         try {
             String sql = "SELECT * FROM lahan WHERE no=?";
             PreparedStatement prepare = con.prepareStatement(sql);
@@ -55,12 +55,12 @@ public class LahanModel {
             ResultSet resultSet = prepare.executeQuery();
             list = new ArrayList<>();
             while(resultSet.next()){
-               dosen = new Lahan( resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
+               lahan = new Lahan( resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
             }
         } catch (SQLException ex) {
             System.out.println(""+ex);
         }
-        return dosen;
+        return lahan;
     }
     
     public String getno(){
@@ -78,14 +78,14 @@ public class LahanModel {
         return no;
     }
 
-    public boolean insert(Lahan dosen){
+    public boolean insert(Lahan lahan){
         String sql = "INSERT INTO lahan (no, nama, alamat) VALUES (?, ?, ?)";
         PreparedStatement prepare = null;
         try {
             prepare = con.prepareStatement(sql);
             con.setAutoCommit(false);
             for(int i=0 ; i<3 ; i++){
-                prepare.setObject(i+1, dosen.getObject(i));
+                prepare.setObject(i+1, lahan.getObject(i));
             }
             prepare.executeUpdate();
             con.commit();
@@ -102,15 +102,15 @@ public class LahanModel {
         return true;
     }
     
-    public boolean update(Lahan dosen){
+    public boolean update(Lahan lahan){
         String sql = "UPDATE lahan SET nama=?, alamat=? WHERE no=?";
         PreparedStatement prepare = null;
         try {
             prepare = con.prepareStatement(sql);
             con.setAutoCommit(false);
             for(int i=1 ; i<3 ; i++){
-                prepare.setObject(i, dosen.getObject(i));
-                prepare.setObject(3, dosen.getNo());
+                prepare.setObject(i, lahan.getObject(i));
+                prepare.setObject(3, lahan.getNo());
             }
             prepare.executeUpdate();
             con.commit();

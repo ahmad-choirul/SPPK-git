@@ -22,7 +22,7 @@ import view.AnalisaView;
 
 /**
  *
- * @author Fadli Hudaya
+ * @author ahmad choirul
  */
 public class AnalisaController {
 
@@ -30,14 +30,14 @@ public class AnalisaController {
     private KriteriaLahanModel kriterialahanmodel;
     private KriteriaLahan kriterialahan;
 
-    public AnalisaController(AnalisaView analisaView, KriteriaLahanModel kriteriaDosenModel) {
+    public AnalisaController(AnalisaView analisaView, KriteriaLahanModel kriterialahanmodel) {
         this.analisaView = analisaView;
-        this.kriterialahanmodel = kriteriaDosenModel;
+        this.kriterialahanmodel = kriterialahanmodel;
     }
 
     public void refreshTable() {
         analisaView.setDataAwalTableModel(new DataAwalTableModel());
-        analisaView.getDataAwalTableModel().setListKriteria_dosen(kriterialahanmodel.getAll());
+        analisaView.getDataAwalTableModel().setListKriteria_lahan(kriterialahanmodel.getAll());
         analisaView.getDataAwalTable().setModel(analisaView.getDataAwalTableModel());
         analisaView.getDataAwalTable().getTableHeader().setFont(new Font("Segoe UI", 0, 14));
     }
@@ -144,28 +144,9 @@ public class AnalisaController {
     public void getSolusiIdeal() {
         Double[] max = new Double[getKriteria().length];
         Double[] min = new Double[getKriteria().length];
-//        for (int i = 0; i < getKriteria().length; i++) {
-//            Double tempPositif = 0.0;
-//            for (int j = 0; j < getjumlahlahan(); j++) {
-//                Double nilai = Double.valueOf(analisaView.getmNormalisasiTable().getValueAt(j, i).toString());
-//                if (nilai > tempPositif) {
-//                    tempPositif = nilai;
-//                    max[i] = nilai;
-//                    
-//                }
-//                if (j == 0) {
-//                    min[i] = Double.valueOf(analisaView.getmNormalisasiTable().getValueAt(j, i).toString());
-//                } else {
-//                    if (nilai < min[i]) {
-//                        min[i] = nilai;
-//                    }
-//                }
-//            }
-//            
-//        }
         for (int i = 0; i < getKriteria().length; i++) {
             double dapatmax = 0;
-            
+
             for (int j = 0; j < getjumlahlahan(); j++) {
                 Double nilai = Double.valueOf(analisaView.getmNormalisasiTable().getValueAt(j, i).toString());
                 if (dapatmax < nilai) {
@@ -174,31 +155,19 @@ public class AnalisaController {
                 }
             }
         }
-        for (int i = 0; i <getKriteria().length; i++) {
+        for (int i = 0; i < getKriteria().length; i++) {
             double dapatmin = 1000000000;
-          for (int j = 0; j < getjumlahlahan(); j++) {
+            for (int j = 0; j < getjumlahlahan(); j++) {
                 Double nilai = Double.valueOf(analisaView.getmNormalisasiTable().getValueAt(j, i).toString());
                 if (dapatmin > nilai) {
                     min[i] = nilai;
                     dapatmin = nilai;
                 }
             }
-            
         }
-//for (int j = 0; j < getKriteria().length; j++) {
-//                System.out.println("nilai max = "+max[j]);
-//            }
-//        for (int i = 0; i < getjumlahlahan(); i++) {
-//            for (int j = 0; j < getKriteria().length; j++) {
-//                Double nilai = Double.valueOf(analisaView.getmNormalisasiTable().getValueAt(i, j).toString());
-//                //System.out.println(nilai);
-//                dataPositif[i][j] = Math.pow((nilai - max[j]), 2);
-//                dataNegatif[i][j] = Math.pow((nilai - min[j]), 2);
-//            }
-//        }
-Object columnNames[] = kriterialahanmodel.getKriteria();
-Object rowdatamax[][]={max};
-Object rowdatamin[][]={min};
+        Object columnNames[] = kriterialahanmodel.getKriteria();
+        Object rowdatamax[][] = {max};
+        Object rowdatamin[][] = {min};
         DefaultTableModel dfPositif = new DefaultTableModel(rowdatamax, columnNames);
         DefaultTableModel dfNegatif = new DefaultTableModel(rowdatamin, columnNames);
 
@@ -207,78 +176,59 @@ Object rowdatamin[][]={min};
     }
 
     public void getHasil() {
-        //=====================================================================================================
-        String[][] jarakidealpositif = new String [getjumlahlahan()][];//array untuk tabel
-        String[][] jarakidealnegatif = new String [getjumlahlahan()][];
-        
-        Double nilailahan[] = new Double[getjumlahlahan()];
+        String[] jarakidealpositif = new String[getjumlahlahan()];//array untuk tabel
+        String[] jarakidealnegatif = new String[getjumlahlahan()];
+        String[] ranking = new String[getjumlahlahan()];
         for (int i = 0; i < getjumlahlahan(); i++) {
             Double totalPositif = 0.0;
             Double totalNegatif = 0.0;
+
             for (int j = 0; j < getKriteria().length; j++) {
-                double getapositif= Double.valueOf(analisaView.getSIPositifTable().getValueAt(j, i).toString());//nilaiD+
-                for (int k = 0; k < nilailahan.length; k++) {
-                    double getkriteria= Double.valueOf(analisaView.getmNormalisasiTable().getValueAt(k, j).toString());//nilaiD+
-                    totalPositif += Math.sqrt(Math.pow(getapositif-getkriteria, 2));
-                }
-                jarakidealpositif[i][j]=totalPositif+"";
+                double getapositif = Double.valueOf(analisaView.getSIPositifTable().getValueAt(0, j).toString());//nilaiD-
+                double getanegatif = Double.valueOf(analisaView.getSINegatifTable().getValueAt(0, j).toString());//nilaiD+
+                double getkriteria = Double.valueOf(analisaView.getmNormalisasiTable().getValueAt(i, j).toString());//nilaiD+
+                double hitung = getapositif - getkriteria;
+                hitung = Math.pow(hitung, 2);
+                totalPositif += hitung;
+                hitung = getanegatif - getkriteria;
+                hitung = Math.pow(hitung, 2);
+                totalNegatif += hitung;
             }
+
+            totalPositif = Math.sqrt(totalPositif);
+            totalNegatif = Math.sqrt(totalNegatif);
+            jarakidealnegatif[i] = totalNegatif + "";
+            jarakidealpositif[i] = totalPositif + "";
             Double hasil = totalNegatif / (totalPositif + totalNegatif);//hitung v
-            nilailahan[i] = hasil;//nilai V
+            ranking[i] = hasil + "";
         }
-        
+
         Object columnNameskriteria[] = kriterialahanmodel.getKriteria();
         Object columnNameslahan[] = kriterialahanmodel.getlahan();
-Object rowidealpositif[][]={jarakidealpositif};
-Object rowdatanegatif[][]={jarakidealnegatif};
-        DefaultTableModel jarakpositif = new DefaultTableModel(rowidealpositif, columnNameskriteria);
+
+        Object columnamehasil[] = {"no", "nama lahan", "nilai"};
+        Object rowhasil[][] = new Object[getjumlahlahan()][3];
+        for (int i = 0; i < rowhasil.length; i++) {
+
+        }
+        for (int i = 0; i < getnamalahan().length; i++) {
+            rowhasil[i][0] = i + 1;
+            rowhasil[i][1] = columnNameslahan[i];
+            rowhasil[i][2] = ranking[i];
+
+        }
+
+        Object rowidealpositif[][] = {jarakidealpositif};
+        Object rowdatanegatif[][] = {jarakidealnegatif};
+
+        DefaultTableModel jarakpositif = new DefaultTableModel(rowidealpositif, columnNameslahan);
         DefaultTableModel jaraknegatif = new DefaultTableModel(rowdatanegatif, columnNameslahan);
+        DefaultTableModel hasilranking = new DefaultTableModel(rowhasil, columnamehasil);
 
         analisaView.getjarakpositif().setModel(jarakpositif);
         analisaView.getjaraknegatif().setModel(jaraknegatif);
-  //      ========================================================================================================================
-//        Object[][] data = new Object[getjumlahlahan()][3];
-//        Double nilailahan[] = new Double[getjumlahlahan()];
+        analisaView.getHasilAnalisaTable().setModel(hasilranking);
 
-//        for (int i = 0; i < getjumlahlahan(); i++) {
-//            Double totalPositif = 0.0;
-//            Double totalNegatif = 0.0;
-//            for (int j = 0; j < getKriteria().length; j++) {
-//                totalPositif += Double.valueOf(analisaView.getSIPositifTable().getValueAt(i, j).toString());
-//                totalNegatif += Double.valueOf(analisaView.getSINegatifTable().getValueAt(i, j).toString());
-//            }
-//            totalPositif = Math.sqrt(totalPositif);
-//            totalNegatif = Math.sqrt(totalNegatif);
-//            Double hasil = totalNegatif / (totalPositif + totalNegatif);
-//            nilailahan[i] = hasil;
-//            //System.out.println(totalPositif + " / (" + totalPositif + " + " + totalNegatif + " = " + hasil);
-//        }
-//
-//        for (int i = 0; i < getjumlahlahan(); i++) {
-//            for (int j = 0; j < 3; j++) {
-//                if (j == 0) {
-//                    data[i][j] = getnamalahan()[i];
-//                } else if (j == 1) {
-//                    data[i][j] = (nilailahan[i] * 100);
-//                } else if (j == 2) {
-//                    if ((nilailahan[i] * 100) <= 50) {
-//                        data[i][j] = "Sangat Buruk";
-//                    } else if ((nilailahan[i] * 100) > 50 && (nilailahan[i] * 100) < 60) {
-//                        data[i][j] = "Buruk";
-//                    } else if ((nilailahan[i] * 100) >= 60 && (nilailahan[i] * 100) < 70) {
-//                        data[i][j] = "Cukup";
-//                    } else if ((nilailahan[i] * 100) >= 70 && (nilailahan[i] * 100) < 80) {
-//                        data[i][j] = "Baik";
-//                    } else if ((nilailahan[i] * 100) > 80) {
-//                        data[i][j] = "Sangat Baik";
-//                    }
-//                }
-//            }
-//        }
-//
-//        String[] header = {"Nama lahan", "Nilai", "hasil"};
-//        DefaultTableModel dtm = new DefaultTableModel(data, header);
-//        analisaView.getHasilAnalisaTable().setModel(dtm);
     }
 
     public void saveHasil() {
@@ -303,7 +253,6 @@ Object rowdatanegatif[][]={jarakidealnegatif};
             JasperPrint jasperPrint = JasperFillManager.fillReport(stream, map, ConnectionUtility.getConnection());
             JasperViewer.viewReport(jasperPrint, false);
         } catch (JRException ex) {
-            //Logger.getLogger(KonsultasiController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

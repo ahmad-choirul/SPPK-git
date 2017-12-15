@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Laporan Dosen" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Laporan lahan" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -23,15 +23,15 @@
 	</style>
 	<queryString>
 		<![CDATA[SELECT
-     dosen.`nidn` AS dosen_nidn,
-     dosen.`nama` AS dosen_nama,
-     dosen.`jenis_kelamin` AS dosen_jenis_kelamin
+     lahan.`nidn` AS lahan_nidn,
+     lahan.`nama` AS lahan_nama,
+     lahan.`jenis_kelamin` AS lahan_jenis_kelamin
 FROM
-     `dosen` dosen]]>
+     `lahan` lahan]]>
 	</queryString>
-	<field name="dosen_nidn" class="java.lang.String"/>
-	<field name="dosen_nama" class="java.lang.String"/>
-	<field name="dosen_jenis_kelamin" class="java.lang.String"/>
+	<field name="lahan_nidn" class="java.lang.String"/>
+	<field name="lahan_nama" class="java.lang.String"/>
+	<field name="lahan_jenis_kelamin" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -59,7 +59,7 @@ FROM
 			</staticText>
 			<image>
 				<reportElement x="4" y="-2" width="125" height="103"/>
-				<imageExpression><![CDATA["D:\\PROGRAM TARI\\SPK Kinerja Dosen\\src\\resources\\UMSU_KECIL.png"]]></imageExpression>
+				<imageExpression><![CDATA["D:\\PROGRAM TARI\\SPK Kinerja lahan\\src\\resources\\UMSU_KECIL.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -70,7 +70,7 @@ FROM
 				<textElement textAlignment="Center">
 					<font fontName="Cambria Math" size="14" isBold="true" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[Daftar Dosen Fak. Ekonomi]]></text>
+				<text><![CDATA[Daftar lahan Fak. Ekonomi]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -104,17 +104,17 @@ FROM
 			<textField>
 				<reportElement style="RecordStyle" x="139" y="0" width="71" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{dosen_nidn}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{lahan_nidn}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="RecordStyle" x="210" y="0" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{dosen_nama}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{lahan_nama}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement style="RecordStyle" x="310" y="0" width="91" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{dosen_jenis_kelamin}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{lahan_jenis_kelamin}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

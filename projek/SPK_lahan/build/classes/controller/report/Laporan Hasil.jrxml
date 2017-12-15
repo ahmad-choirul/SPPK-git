@@ -26,16 +26,16 @@
      hasil_kinerja.`nidn` AS hasil_kinerja_nidn,
      hasil_kinerja.`nilai` AS hasil_kinerja_nilai,
      hasil_kinerja.`kinerja` AS hasil_kinerja_kinerja,
-     dosen.`nidn` AS dosen_nidn,
-     dosen.`nama` AS dosen_nama
+     lahan.`nidn` AS lahan_nidn,
+     lahan.`nama` AS lahan_nama
 FROM
-     `dosen` dosen INNER JOIN `hasil_kinerja` hasil_kinerja ON dosen.`nidn` = hasil_kinerja.`nidn`]]>
+     `lahan` lahan INNER JOIN `hasil_kinerja` hasil_kinerja ON lahan.`nidn` = hasil_kinerja.`nidn`]]>
 	</queryString>
 	<field name="hasil_kinerja_nidn" class="java.lang.String"/>
 	<field name="hasil_kinerja_nilai" class="java.lang.Double"/>
 	<field name="hasil_kinerja_kinerja" class="java.lang.String"/>
-	<field name="dosen_nidn" class="java.lang.String"/>
-	<field name="dosen_nama" class="java.lang.String"/>
+	<field name="lahan_nidn" class="java.lang.String"/>
+	<field name="lahan_nama" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -70,7 +70,7 @@ FROM
 			</line>
 			<image>
 				<reportElement x="3" y="0" width="125" height="103"/>
-				<imageExpression><![CDATA["D:\\PROGRAM TARI\\SPK Kinerja Dosen\\src\\resources\\UMSU_KECIL.png"]]></imageExpression>
+				<imageExpression><![CDATA["D:\\PROGRAM TARI\\SPK Kinerja lahan\\src\\resources\\UMSU_KECIL.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -81,7 +81,7 @@ FROM
 				<textElement textAlignment="Center">
 					<font fontName="Cambria Math" size="14" isBold="true" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[Hasil Analisa Kinerja Dosen]]></text>
+				<text><![CDATA[Hasil Analisa Kinerja lahan]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -99,7 +99,7 @@ FROM
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Cambria Math"/>
 				</textElement>
-				<text><![CDATA[Nama Dosen]]></text>
+				<text><![CDATA[Nama lahan]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="HeaderStyle" x="282" y="0" width="100" height="20"/>
@@ -127,7 +127,7 @@ FROM
 			<textField>
 				<reportElement style="RecordStyle" x="131" y="0" width="151" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{dosen_nama}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{lahan_nama}]]></textFieldExpression>
 			</textField>
 			<textField pattern="###0.00">
 				<reportElement style="RecordStyle" x="282" y="0" width="100" height="20"/>

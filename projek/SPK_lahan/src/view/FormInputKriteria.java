@@ -21,9 +21,9 @@ public class FormInputKriteria extends javax.swing.JDialog {
     public FormInputKriteria(java.awt.Frame parent, boolean modal, KriteriaLahanController kdc) {
         super(parent, modal);
         initComponents();
-        kriteriaDosenModel = new KriteriaLahanModel();
-        this.kriteriaDosenController = kdc;
-        this.kriteriaDosenController.setInputForm(kriteriaDosenModel, this);
+        kriterialahanModel = new KriteriaLahanModel();
+        this.kriterialahanController = kdc;
+        this.kriterialahanController.setInputForm(kriterialahanModel, this);
         kdc.generateField();
         setLocationRelativeTo(null);
     }
@@ -78,6 +78,6 @@ public class FormInputKriteria extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel panel;
     // End of variables declaration//GEN-END:variables
-    private KriteriaLahanController kriteriaDosenController;
-    private KriteriaLahanModel kriteriaDosenModel;
+    private KriteriaLahanController kriterialahanController;
+    private KriteriaLahanModel kriterialahanModel;
 }

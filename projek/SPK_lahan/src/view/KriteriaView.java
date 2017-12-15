@@ -15,7 +15,7 @@ import tablemodel.KriteriaTableModel;
 
 /**
  *
- * @author Fadli Hudaya
+ * @author ahmad choirul
  */
 public class KriteriaView extends javax.swing.JInternalFrame {
 

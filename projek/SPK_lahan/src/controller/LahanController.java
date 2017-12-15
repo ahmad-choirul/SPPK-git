@@ -30,32 +30,32 @@ public class LahanController {
 
     private LahanView LahanView;
     private LahanModel lahanmodel;
-    private Lahan dosen;
+    private Lahan lahan;
 
-    public LahanController(LahanView dosenView, LahanModel dosenModel) {
-        this.LahanView = dosenView;
-        this.lahanmodel = dosenModel;
+    public LahanController(LahanView lahanView, LahanModel lahanModel) {
+        this.LahanView = lahanView;
+        this.lahanmodel = lahanModel;
     }
 
-    public void refreshDosenTable() {
+    public void refreshlahanTable() {
         LahanView.setLahanTableModel(new LahanTableModel());
-        LahanView.getlahanTableModel().setListDosen(lahanmodel.getAll());
+        LahanView.getlahanTableModel().setListlahan(lahanmodel.getAll());
         LahanView.getLahanTable().setModel(LahanView.getlahanTableModel());
         LahanView.getLahanTable().getTableHeader().setFont(new Font("Segoe UI", 0, 14));
-        // ResizeColumnUtility.dynamicResize(dosenView.getDosenTable());
+        // ResizeColumnUtility.dynamicResize(lahanView.getlahanTable());
     }
 
     public void addValueComponent(String no) {
-        dosen = lahanmodel.getlahan(no);
-        LahanView.getNoField().setText(dosen.getNo());
-        LahanView.getNamaField().setText(dosen.getNama());
-        LahanView.getalamtField().setText(dosen.getalamat());
+        lahan = lahanmodel.getlahan(no);
+        LahanView.getNoField().setText(lahan.getNo());
+        LahanView.getNamaField().setText(lahan.getNama());
+        LahanView.getalamtField().setText(lahan.getalamat());
     }
 
-    private Lahan createDosen() {
-        dosen = new Lahan(LahanView.getNoField().getText(), LahanView.getNamaField().getText(), 
+    private Lahan createlahan() {
+        lahan = new Lahan(LahanView.getNoField().getText(), LahanView.getNamaField().getText(), 
                 LahanView.getalamtField().getText());
-        return dosen;
+        return lahan;
     }
 
     private boolean isEmptyField() {
@@ -72,12 +72,12 @@ public class LahanController {
 
     public void saveOrNew() {
         if (!isEmptyField()) {
-            if (lahanmodel.insert(createDosen())) {
-                refreshDosenTable();
+            if (lahanmodel.insert(createlahan())) {
+                refreshlahanTable();
                 resetData();
-                JOptionPane.showMessageDialog(LahanView, "Insert Data Dosen Sukses.");
+                JOptionPane.showMessageDialog(LahanView, "Insert Data lahan Sukses.");
             } else {
-                JOptionPane.showMessageDialog(LahanView, "Insert Data Dosen Gagal !!!");
+                JOptionPane.showMessageDialog(LahanView, "Insert Data lahan Gagal !!!");
             }
         }
     }
@@ -121,12 +121,12 @@ public class LahanController {
 
     public void saveOrUpdate() {
         if (!isEmptyField()) {
-            if (lahanmodel.update(createDosen())) {
-                refreshDosenTable();
+            if (lahanmodel.update(createlahan())) {
+                refreshlahanTable();
                 resetData();
-                JOptionPane.showMessageDialog(LahanView, "Update Data Dosen Sukses.");
+                JOptionPane.showMessageDialog(LahanView, "Update Data lahan Sukses.");
             } else {
-                JOptionPane.showMessageDialog(LahanView, "Update Data Dosen Gagal !!!");
+                JOptionPane.showMessageDialog(LahanView, "Update Data lahan Gagal !!!");
             }
         }
     }
@@ -137,9 +137,9 @@ public class LahanController {
                     JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                 if (lahanmodel.delete(no)) {
                     resetData();
-                    JOptionPane.showMessageDialog(LahanView, "Delete Data Dosen Sukses.");
+                    JOptionPane.showMessageDialog(LahanView, "Delete Data lahan Sukses.");
                 } else {
-                    JOptionPane.showMessageDialog(LahanView, "Delete Data Dosen Gagal !!!");
+                    JOptionPane.showMessageDialog(LahanView, "Delete Data lahan Gagal !!!");
                 }
             }
         }
@@ -174,7 +174,7 @@ public class LahanController {
         LahanView.getNamaField().setText("");
         LahanView.getalamtField().setEnabled(false);
         LahanView.getalamtField().setText("");
-        refreshDosenTable();
+        refreshlahanTable();
     }
 
     public void updateData() {
@@ -207,7 +207,7 @@ public class LahanController {
     public void getReport() {
         InputStream stream;
         Map<String, Object> map;
-        stream = getClass().getResourceAsStream("report/Laporan Dosen.jasper");
+        stream = getClass().getResourceAsStream("report/Laporan lahan.jasper");
         map = new HashMap<>();
         try {
             JasperPrint jasperPrint = JasperFillManager.fillReport(stream, map, ConnectionUtility.getConnection());

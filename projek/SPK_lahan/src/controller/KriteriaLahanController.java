@@ -24,15 +24,15 @@ import view.KriteriaLahanView;
 
 /**
  *
- * @author Fadli Hudaya
+ * @author ahmad choirull
  */
 public class KriteriaLahanController {
 
     private KriteriaLahanView Kriterialahanview;
     private KriteriaLahanModel kriterialahanmodel;
-    private KriteriaLahan kriteria_dosen;
+    private KriteriaLahan kriteria_lahan;
     private FormInputKriteria formInputKriteria;
-    //private FormInputKriteriaDosen formInputKriteriaDosen;
+    //private FormInputKriterialahan formInputKriterialahan;
     private JLabel namaLabel = new JLabel();
     private JButton button;
     private JTextField fieldNama;
@@ -40,23 +40,23 @@ public class KriteriaLahanController {
     private JComboBox[] field;
     private String[] himpunan = new String[5];
 
-    public KriteriaLahanController(KriteriaLahanView kriteriaDosenView, KriteriaLahanModel kriteriaDosenModel) {
-        this.Kriterialahanview = kriteriaDosenView;
-        this.kriterialahanmodel = kriteriaDosenModel;
+    public KriteriaLahanController(KriteriaLahanView kriterialahanView, KriteriaLahanModel kriterialahanModel) {
+        this.Kriterialahanview = kriterialahanView;
+        this.kriterialahanmodel = kriterialahanModel;
         setkriteria();
     }
 
-    public void setInputForm(KriteriaLahanModel kriteriaDosenModel, FormInputKriteria formInputKriteria) {
-        this.kriterialahanmodel = kriteriaDosenModel;
+    public void setInputForm(KriteriaLahanModel kriterialahanModel, FormInputKriteria formInputKriteria) {
+        this.kriterialahanmodel = kriterialahanModel;
         this.formInputKriteria = formInputKriteria;
     }
 
     public void refreshKriteriaLahanTable(String no) {
-        Kriterialahanview.setKriteriaDosenTableModel(new KriteriaLahanTableModel());
-        Kriterialahanview.getKriteriaDosenTableModel().setListKriteria_dosen(kriterialahanmodel.getAll(no));
-        Kriterialahanview.getKriteriaDosenTable().setModel(Kriterialahanview.getKriteriaDosenTableModel());
-        Kriterialahanview.getKriteriaDosenTable().getTableHeader().setFont(new Font("Segoe UI", 0, 14));
-        // ResizeColumnUtility.dynamicResize(kriteriaDosenView.getKriteriaDosenTable());
+        Kriterialahanview.setKriterialahanTableModel(new KriteriaLahanTableModel());
+        Kriterialahanview.getKriterialahanTableModel().setListKriteria_lahan(kriterialahanmodel.getAll(no));
+        Kriterialahanview.getKriterialahanTable().setModel(Kriterialahanview.getKriterialahanTableModel());
+        Kriterialahanview.getKriterialahanTable().getTableHeader().setFont(new Font("Segoe UI", 0, 14));
+        // ResizeColumnUtility.dynamicResize(kriterialahanView.getKriterialahanTable());
     }
 
     public void generateField() {
@@ -104,20 +104,20 @@ public class KriteriaLahanController {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                createKriteriaDosen();
+                createKriterialahan();
             }
         });
     }
 
-    private void createKriteriaDosen() {
+    private void createKriterialahan() {
         System.out.println(kriteriaLabel.length);
         for (int i = 0; i < kriteriaLabel.length; i++) {
             String no = kriterialahanmodel.getno(fieldNama.getText());
             System.out.println("kriteria label = " + kriteriaLabel[i].getText());
             String id_kriteria = kriterialahanmodel.getIdKriteria(kriteriaLabel[i].getText());
             String id_sub = kriterialahanmodel.getIdSubKriteria(id_kriteria, field[i].getSelectedItem().toString());
-            kriteria_dosen = new KriteriaLahan(no, id_kriteria, id_sub);
-            kriterialahanmodel.insert(kriteria_dosen);
+            kriteria_lahan = new KriteriaLahan(no, id_kriteria, id_sub);
+            kriterialahanmodel.insert(kriteria_lahan);
         }
         formInputKriteria.dispose();
         //JOptionPane.showMessageDialog(formInputKriteria, "Data Berhasil Di Tambah");
@@ -138,7 +138,7 @@ public class KriteriaLahanController {
         }
     }
 
-    public void loadNamaDosen() {
+    public void loadNamalahan() {
         String[] nama = kriterialahanmodel.getNamaLahan();
         Kriterialahanview.getNamaLahanField().removeAllItems();
         for (int i = 0; i < nama.length; i++) {

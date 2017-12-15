@@ -16,7 +16,7 @@ import view.SubkriteriaView;
 
 /**
  *
- * @author Fadli Hudaya
+ * @author ahmad choirul
  */
 public class SubkriteriaController {
 

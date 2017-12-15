@@ -16,19 +16,19 @@ import tablemodel.KriteriaLahanTableModel;
 
 /**
  *
- * @author Fadli Hudaya
+ * @author ahmad choirul
  */
 public class KriteriaLahanView extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form KriteriaDosenView
+     * Creates new form KriterialahanView
      */
     public KriteriaLahanView() {
         initComponents();
-        kriteriaDosenModel = new KriteriaLahanModel();
-        kriteriaDosenController = new KriteriaLahanController(this, kriteriaDosenModel);
-        kriteriaDosenController.loadNamaDosen();
-        kriteriaDosenController.setAction();
+        kriterialahanModel = new KriteriaLahanModel();
+        kriterialahanController = new KriteriaLahanController(this, kriterialahanModel);
+        kriterialahanController.loadNamalahan();
+        kriterialahanController.setAction();
         setLocation((1366 / 2) - (getWidth() / 2), (768 / 2) - (getHeight() / 2));
     }
 
@@ -40,20 +40,20 @@ public class KriteriaLahanView extends javax.swing.JInternalFrame {
         return hapusButton;
     }
 
-    public JTable getKriteriaDosenTable() {
-        return kriteriaDosenTable;
+    public JTable getKriterialahanTable() {
+        return kriterialahanTable;
     }
 
     public JComboBox getNamaLahanField() {
-        return namaDosenField;
+        return namalahanField;
     }
 
-    public KriteriaLahanTableModel getKriteriaDosenTableModel() {
-        return kriteriaDosenTableModel;
+    public KriteriaLahanTableModel getKriterialahanTableModel() {
+        return kriterialahanTableModel;
     }
 
-    public void setKriteriaDosenTableModel(KriteriaLahanTableModel kriteriaDosenTableModel) {
-        this.kriteriaDosenTableModel = kriteriaDosenTableModel;
+    public void setKriterialahanTableModel(KriteriaLahanTableModel kriterialahanTableModel) {
+        this.kriterialahanTableModel = kriterialahanTableModel;
     }
 
     public String getNo() {
@@ -93,9 +93,9 @@ public class KriteriaLahanView extends javax.swing.JInternalFrame {
         baruButton = new javax.swing.JButton();
         hapusButton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        namaDosenField = new javax.swing.JComboBox();
+        namalahanField = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        kriteriaDosenTable = new javax.swing.JTable();
+        kriterialahanTable = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -129,15 +129,15 @@ public class KriteriaLahanView extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel4.setText("Nama Lahan :");
 
-        namaDosenField.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        namaDosenField.addItemListener(new java.awt.event.ItemListener() {
+        namalahanField.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        namalahanField.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                namaDosenFieldItemStateChanged(evt);
+                namalahanFieldItemStateChanged(evt);
             }
         });
 
-        kriteriaDosenTable.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        kriteriaDosenTable.setModel(new javax.swing.table.DefaultTableModel(
+        kriterialahanTable.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        kriterialahanTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -148,8 +148,8 @@ public class KriteriaLahanView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        kriteriaDosenTable.setRowHeight(22);
-        jScrollPane1.setViewportView(kriteriaDosenTable);
+        kriterialahanTable.setRowHeight(22);
+        jScrollPane1.setViewportView(kriterialahanTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -165,7 +165,7 @@ public class KriteriaLahanView extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(namaDosenField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(namalahanField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -175,7 +175,7 @@ public class KriteriaLahanView extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(namaDosenField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(namalahanField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
                 .addContainerGap())
@@ -185,22 +185,22 @@ public class KriteriaLahanView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void baruButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_baruButtonActionPerformed
-        if (kriteriaDosenTable.getRowCount() == 0) {
-            FormInputKriteria fik = new FormInputKriteria(null, true, kriteriaDosenController);
+        if (kriterialahanTable.getRowCount() == 0) {
+            FormInputKriteria fik = new FormInputKriteria(null, true, kriterialahanController);
             fik.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(this, "Kriteria Dosen Sudah Ada, Hapus Dahulu Jika Ingin Menambah Kriteria");
+            JOptionPane.showMessageDialog(this, "Kriteria lahan Sudah Ada, Hapus Dahulu Jika Ingin Menambah Kriteria");
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_baruButtonActionPerformed
 
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
-        kriteriaDosenController.saveOrDelete();
+        kriterialahanController.saveOrDelete();
     }//GEN-LAST:event_hapusButtonActionPerformed
 
-    private void namaDosenFieldItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_namaDosenFieldItemStateChanged
+    private void namalahanFieldItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_namalahanFieldItemStateChanged
 
-    }//GEN-LAST:event_namaDosenFieldItemStateChanged
+    }//GEN-LAST:event_namalahanFieldItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -209,11 +209,11 @@ public class KriteriaLahanView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JTable kriteriaDosenTable;
-    private javax.swing.JComboBox namaDosenField;
+    private javax.swing.JTable kriterialahanTable;
+    private javax.swing.JComboBox namalahanField;
     // End of variables declaration//GEN-END:variables
-    private KriteriaLahanModel kriteriaDosenModel;
-    private KriteriaLahanTableModel kriteriaDosenTableModel;
+    private KriteriaLahanModel kriterialahanModel;
+    private KriteriaLahanTableModel kriterialahanTableModel;
     private String no, id_kriteria, id_subkriteria;
-    private KriteriaLahanController kriteriaDosenController;
+    private KriteriaLahanController kriterialahanController;
 }

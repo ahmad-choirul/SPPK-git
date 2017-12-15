@@ -23,7 +23,7 @@ public class LahanTableModel extends AbstractTableModel{
         list = new ArrayList<>();
     }
     
-    public void setListDosen(List<Lahan> list){
+    public void setListlahan(List<Lahan> list){
         this.list = list;
     }
     

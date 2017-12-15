@@ -18,7 +18,7 @@ import view.MainForm;
 
 /**
  *
- * @author Fadli Hudaya
+ * @author ahmad choirul
  */
 public class AdminController {
 

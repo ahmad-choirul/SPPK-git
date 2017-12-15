@@ -15,7 +15,7 @@ import tablemodel.AdminTableModel;
 
 /**
  *
- * @author Fadli Hudaya
+ * @author ahmad choirul
  */
 public class AdminView extends javax.swing.JInternalFrame {
 

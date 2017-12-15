@@ -15,7 +15,7 @@ import org.jvnet.substance.skin.SubstanceBusinessBlueSteelLookAndFeel;
 
 /**
  *
- * @author Fadli Hudaya
+ * @author ahmad choirul
  */
 public class LoginView extends javax.swing.JFrame {
 

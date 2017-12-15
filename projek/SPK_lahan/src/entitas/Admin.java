@@ -7,7 +7,7 @@ package entitas;
 
 /**
  *
- * @author Fadli Hudaya
+ * @author ahmad choirul
  */
 public class Admin {
     

@@ -17,7 +17,7 @@ import tablemodel.SubkriteriaTableModel;
 
 /**
  *
- * @author Fadli Hudaya
+ * @author ahmad choirul
  */
 public class SubkriteriaView extends javax.swing.JInternalFrame {
 

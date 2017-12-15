@@ -38,8 +38,8 @@ public class KriteriaLahanModel {
             ResultSet resultSet = statement.executeQuery(sql);
             list = new ArrayList<>();
             while (resultSet.next()) {
-                KriteriaLahan kriteria_dosen = new KriteriaLahan(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
-                list.add(kriteria_dosen);
+                KriteriaLahan kriteria_lahan = new KriteriaLahan(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
+                list.add(kriteria_lahan);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error When Retrieve Data\n" + ex);
@@ -55,8 +55,8 @@ public class KriteriaLahanModel {
             ResultSet resultSet = statement.executeQuery(sql);
             list = new ArrayList<>();
             while (resultSet.next()) {
-                KriteriaLahan kriteria_dosen = new KriteriaLahan(resultSet.getString(1), null, null, resultSet.getString(2), resultSet.getString(3));
-                list.add(kriteria_dosen);
+                KriteriaLahan kriteria_lahan = new KriteriaLahan(resultSet.getString(1), null, null, resultSet.getString(2), resultSet.getString(3));
+                list.add(kriteria_lahan);
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error When Retrieve Data\n" + ex);
@@ -112,27 +112,27 @@ public class KriteriaLahanModel {
     public String[] getlahan() {
         String sql = "SELECT nama FROM lahan ORDER BY no";
         PreparedStatement statement = null;
-        String[] namaDosen = null;
+        String[] namalahan = null;
         try {
             statement = con.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             rs.last();
             int rows = rs.getRow();
-            namaDosen = new String[rows];
+            namalahan = new String[rows];
             rs.beforeFirst();
             int i = 0;
             while (rs.next()) {
-                namaDosen[i] = rs.getString(1);
+                namalahan[i] = rs.getString(1);
                 i++;
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Data barang gagal ditampilkan\n" + e.getMessage());
         }
-        return namaDosen;
+        return namalahan;
     }
 
     public KriteriaLahan getKriteriaLahan(String no) {
-        KriteriaLahan kriteria_dosen = null;
+        KriteriaLahan kriteria_lahan = null;
         try {
             String sql = "SELECT * FROM kriteria_lahan WHERE no=?";
             PreparedStatement prepare = con.prepareStatement(sql);
@@ -140,12 +140,12 @@ public class KriteriaLahanModel {
             ResultSet resultSet = prepare.executeQuery();
             list = new ArrayList<>();
             while (resultSet.next()) {
-                kriteria_dosen = new KriteriaLahan(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
+                kriteria_lahan = new KriteriaLahan(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
             }
         } catch (SQLException ex) {
             System.out.println("" + ex);
         }
-        return kriteria_dosen;
+        return kriteria_lahan;
     }
     
     public String[] getsubkriteria(int id) {
@@ -379,15 +379,15 @@ public class KriteriaLahanModel {
         return true;
     }
 
-    public boolean update(KriteriaLahan kriteria_dosen) {
+    public boolean update(KriteriaLahan kriteria_lahan) {
         String sql = "UPDATE kriteria_lahan SET id_kriteria=?, id_himpunan=? WHERE no=?";
         PreparedStatement prepare = null;
         try {
             prepare = con.prepareStatement(sql);
             con.setAutoCommit(false);
             for (int i = 1; i < 3; i++) {
-                prepare.setObject(i, kriteria_dosen.getObject(i));
-                prepare.setObject(3, kriteria_dosen.getno());
+                prepare.setObject(i, kriteria_lahan.getObject(i));
+                prepare.setObject(3, kriteria_lahan.getno());
             }
             prepare.executeUpdate();
             con.commit();

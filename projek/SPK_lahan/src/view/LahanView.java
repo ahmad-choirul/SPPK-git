@@ -17,19 +17,19 @@ import tablemodel.LahanTableModel;
 
 /**
  *
- * @author Fadli Hudaya
+ * @author ahmad choirul
  */
 public class LahanView extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form DosenView
+     * Creates new form lahanView
      */
     public LahanView() {
         initComponents();
-        dosenModel = new LahanModel();
-        dosenController = new LahanController(this, dosenModel);
-        dosenController.refreshDosenTable();
-        dosenController.setAction();
+        lahanModel = new LahanModel();
+        lahanController = new LahanController(this, lahanModel);
+        lahanController.refreshlahanTable();
+        lahanController.setAction();
         setLocation((1366 / 2) - (getWidth() / 2), (768 / 2) - (getHeight() / 2));
     }
 
@@ -46,7 +46,7 @@ public class LahanView extends javax.swing.JInternalFrame {
     }
 
     public JTable getLahanTable() {
-        return dosenTable;
+        return lahanTable;
     }
 
     public JButton getHapusButton() {
@@ -70,11 +70,11 @@ public class LahanView extends javax.swing.JInternalFrame {
     }
 
     public LahanTableModel getlahanTableModel() {
-        return dosenTableModel;
+        return lahanTableModel;
     }
 
-    public void setLahanTableModel(LahanTableModel dosenTableModel) {
-        this.dosenTableModel = dosenTableModel;
+    public void setLahanTableModel(LahanTableModel lahanTableModel) {
+        this.lahanTableModel = lahanTableModel;
     }
 
     public String getno() {
@@ -108,7 +108,7 @@ public class LahanView extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        dosenTable = new javax.swing.JTable();
+        lahanTable = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -240,8 +240,8 @@ public class LahanView extends javax.swing.JInternalFrame {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        dosenTable.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        dosenTable.setModel(new javax.swing.table.DefaultTableModel(
+        lahanTable.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        lahanTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -252,8 +252,8 @@ public class LahanView extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        dosenTable.setRowHeight(22);
-        jScrollPane1.setViewportView(dosenTable);
+        lahanTable.setRowHeight(22);
+        jScrollPane1.setViewportView(lahanTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -284,34 +284,34 @@ public class LahanView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void baruButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_baruButtonActionPerformed
-        dosenController.newData();        // TODO add your handling code here:
+        lahanController.newData();        // TODO add your handling code here:
     }//GEN-LAST:event_baruButtonActionPerformed
 
     private void tambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahButtonActionPerformed
-        dosenController.saveOrNew();        // TODO add your handling code here:
+        lahanController.saveOrNew();        // TODO add your handling code here:
     }//GEN-LAST:event_tambahButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        if (dosenTable.getSelectedRow() != -1) {
-            dosenController.updateData();
+        if (lahanTable.getSelectedRow() != -1) {
+            lahanController.updateData();
         }
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void hapusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButtonActionPerformed
-        if (dosenTable.getSelectedRow() != -1) {
-            dosenController.saveOrDelete(no);
+        if (lahanTable.getSelectedRow() != -1) {
+            lahanController.saveOrDelete(no);
         }
     }//GEN-LAST:event_hapusButtonActionPerformed
 
     private void hapusButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hapusButton1ActionPerformed
-        dosenController.getReport();
+        lahanController.getReport();
     }//GEN-LAST:event_hapusButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField alamat;
     private javax.swing.JButton baruButton;
-    private javax.swing.JTable dosenTable;
+    private javax.swing.JTable lahanTable;
     private javax.swing.JButton hapusButton;
     private javax.swing.JButton hapusButton1;
     private javax.swing.JLabel jLabel1;
@@ -325,8 +325,8 @@ public class LahanView extends javax.swing.JInternalFrame {
     private javax.swing.JButton tambahButton;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
-    private LahanModel dosenModel;
-    private LahanTableModel dosenTableModel;
+    private LahanModel lahanModel;
+    private LahanTableModel lahanTableModel;
     private String no = "";
-    private LahanController dosenController;
+    private LahanController lahanController;
 }

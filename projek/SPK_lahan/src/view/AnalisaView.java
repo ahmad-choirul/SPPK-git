@@ -12,7 +12,7 @@ import tablemodel.DataAwalTableModel;
 
 /**
  *
- * @author Fadli Hudaya
+ * @author ahmad choirul
  */
 public class AnalisaView extends javax.swing.JInternalFrame {
 
@@ -21,8 +21,8 @@ public class AnalisaView extends javax.swing.JInternalFrame {
      */
     public AnalisaView() {
         initComponents();
-        kriteriaDosenModel = new KriteriaLahanModel();
-        analisaController = new AnalisaController(this, kriteriaDosenModel);
+        kriterialahanModel = new KriteriaLahanModel();
+        analisaController = new AnalisaController(this, kriterialahanModel);
         analisaController.refreshTable();
         analisaController.getMatriksKeputusan();
         analisaController.getMatrikNormalisasi();
@@ -367,7 +367,7 @@ public class AnalisaView extends javax.swing.JInternalFrame {
     private javax.swing.JTable mKeputusanTable;
     private javax.swing.JTable mNormalisasiTable;
     // End of variables declaration//GEN-END:variables
-    private KriteriaLahanModel kriteriaDosenModel;
+    private KriteriaLahanModel kriterialahanModel;
     private DataAwalTableModel dataAwalTableModel;
     private AnalisaController analisaController;
     

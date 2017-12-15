@@ -12,7 +12,7 @@ import org.jvnet.substance.skin.SubstanceGreenMagicLookAndFeel;
 
 /**
  *
- * @author Fadli Hudaya
+ * @author ahmad choirul
  */
 public class MainForm extends javax.swing.JFrame {
 

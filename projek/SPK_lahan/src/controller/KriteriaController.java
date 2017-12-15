@@ -16,7 +16,7 @@ import view.KriteriaView;
 
 /**
  *
- * @author Fadli Hudaya
+ * @author ahmad choirul
  */
 public class KriteriaController {
 
